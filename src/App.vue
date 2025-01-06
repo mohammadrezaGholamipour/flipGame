@@ -29,15 +29,13 @@ const handleShowImage = (item) => {
       if (state.soundStatus) sound2.play()
     }
 
-    const filterList = state.list.filter(
-      (filter) => filter.showImage && !filter.found
-    );
+    const filterList = state.list.filter((filter) => filter.showImage && !filter.found);
 
     if (filterList.length > 1) return;
-    if (!item.showImage) state.numberOfMoves--;
+    if (!item.showImage && !item.found) state.numberOfMoves--;
     item.showImage = true;
 
-    if (filterList.length === 1) {
+    if (filterList.length === 1 && !item.found) {
       if (
         filterList[0].imageName === item.imageName &&
         filterList[0].id !== item.id
